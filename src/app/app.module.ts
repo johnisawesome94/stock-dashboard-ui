@@ -7,7 +7,10 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { AddStockModule } from "./add-stock/add-stock.module";
 import { AppComponent } from "./app.component";
 import { HelloComponent } from "./hello.component";
-import { MaterialModule } from "./material.module";
+import { MatButtonModule } from "@angular/material/button";
+import { MatSlideToggleModule } from "@angular/material/slide-toggle";
+import { MatIconModule } from "@angular/material/icon";
+import { MatToolbarModule } from "@angular/material/toolbar";
 
 @NgModule({
   imports: [
@@ -15,7 +18,10 @@ import { MaterialModule } from "./material.module";
     BrowserAnimationsModule,
     BrowserModule,
     FormsModule,
-    MaterialModule,
+    MatButtonModule,
+    MatSlideToggleModule,
+    MatIconModule,
+    MatToolbarModule,
     ReactiveFormsModule
   ],
   declarations: [AppComponent, HelloComponent],

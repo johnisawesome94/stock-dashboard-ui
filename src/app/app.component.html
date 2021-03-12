@@ -1,4 +1,15 @@
-<hello name="{{ name }}"></hello>
-<p>
-  Start editing to see some magic happen :)
-</p>
+<div class="mat-app-background" style="height: 100%; width: 100%;display: flex; flex-direction: column;">
+  <mat-toolbar color="primary" style="display: flex; align-items: space-between; justify-content: space-between">
+    <div style="flex: 1 1 auto">Angular Dark Mode</div>
+
+    <div style="display: flex; flex: 1">
+      <mat-icon></mat-icon>
+      <mat-slide-toggle (change)="darkModeToggle($event)"></mat-slide-toggle>
+      <mat-icon class="material-icons">visibility</mat-icon>
+    </div>
+  </mat-toolbar>
+
+  <hello name=" Bob Boberton"></hello>
+
+  <button mat-raised-button color="primary" (click)="openAddStock()">Add stock</button>
+</div>
