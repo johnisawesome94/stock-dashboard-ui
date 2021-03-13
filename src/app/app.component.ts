@@ -27,7 +27,6 @@ export class AppComponent {
 
   public openAddStock() {
     this.dialog.open(AddStockComponent, {
-      height: "400px",
       width: "600px"
     });
   }
