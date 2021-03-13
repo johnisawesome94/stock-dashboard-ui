@@ -25,6 +25,9 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     ReactiveFormsModule
   ],
   declarations: [AppComponent, HelloComponent],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  providers: [
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
+  ]
 })
 export class AppModule {}
