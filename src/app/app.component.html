@@ -13,7 +13,6 @@
   <div style="margin: 15px;">
 
     <hello name="Bob Bobberton"></hello>
-
-    <app-stock-list [stocks]="stocks"></app-stock-list>
+    <app-stock-list *ngIf="stocks && stocks.length" [stocks]="stocks"></app-stock-list>
   </div>
 </div>

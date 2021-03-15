@@ -21,14 +21,6 @@ export class AddStockComponent implements OnInit {
       ticker: ["", { validators: [Validators.required] }],
       avgPrice: ["", { validators: [Validators.required] }],
       numberShares: ["", { validators: [Validators.required] }]
-      // port: [ this.DEFAULT_REST_PORT ],
-      // backupHostGroup: this.formBuilder.group({
-      //   backupHost: [ '', [ Validators.required ] ]
-      // })
-    });
-
-    this.form.get("ticker").valueChanges.subscribe(value => {
-      console.log(value);
     });
   }
 

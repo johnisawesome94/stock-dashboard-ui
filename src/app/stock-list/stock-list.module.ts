@@ -5,6 +5,7 @@ import { MatTableModule } from "@angular/material/table";
 
 @NgModule({
   imports: [CommonModule, MatTableModule],
-  declarations: [StockListComponent]
+  declarations: [StockListComponent],
+  exports: [StockListComponent]
 })
 export class StockListModule {}

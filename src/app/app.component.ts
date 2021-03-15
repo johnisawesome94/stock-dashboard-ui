@@ -36,6 +36,7 @@ export class AppComponent {
       .subscribe((result: NewStock) => {
         if (!!result) {
           this.stocks.push(result);
+          this.stocks = [...this.stocks];
         }
       });
   }
