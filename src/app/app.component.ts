@@ -4,6 +4,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { AddStockComponent } from "./add-stock/add-stock.component";
+import { NewStock } from "./add-stock/new-stock";
 
 @Component({
   selector: "my-app",
@@ -14,6 +15,7 @@ export class AppComponent {
   @HostBinding("class") className = "";
 
   private readonly darkClassName: string = "darkMode";
+  public stocks: NewStock[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -26,9 +28,16 @@ export class AppComponent {
   }
 
   public openAddStock() {
-    this.dialog.open(AddStockComponent, {
-      width: "600px"
-    });
+    this.dialog
+      .open(AddStockComponent, {
+        width: "600px"
+      })
+      .afterClosed()
+      .subscribe((result: NewStock) => {
+        if (!!result) {
+          this.stocks.push(result);
+        }
+      });
   }
 
   public darkModeToggle(event: MatSlideToggleChange) {

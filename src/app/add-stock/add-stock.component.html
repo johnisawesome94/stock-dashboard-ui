@@ -1,21 +1,32 @@
-<form [formGroup]="form">
+<form [formGroup]="form" (submit)="onSubmit($event)">
 
   <h2 mat-dialog-title>Add stock to portfolio</h2>
 
   <mat-dialog-content class="mat-typography" style="display: flex; flex-direction: column;">
+
     <mat-form-field appearance="fill">
       <mat-label>Stock ticker</mat-label>
-      <input matInput formControlName="ticker">
+      <input matInput required formControlName="ticker">
+      <mat-error>{{ getInputErrorMessage() }}</mat-error>
     </mat-form-field>
+
     <mat-form-field appearance="fill">
       <mat-label>Average purchase price</mat-label>
-      <input matInput formControlName="avgPrice">
+      <input matInput required formControlName="avgPrice">
+      <mat-error>{{ getInputErrorMessage() }}</mat-error>
     </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Number of shares</mat-label>
+      <input matInput required type="number" [min]="0" formControlName="numberShares">
+      <mat-error>{{ getInputErrorMessage() }}</mat-error>
+    </mat-form-field>
+
   </mat-dialog-content>
 
   <mat-dialog-actions align="end">
     <button mat-raised-button color="accent" mat-dialog-close>Cancel</button>
-    <button mat-raised-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>Add</button>
+    <button mat-raised-button color="primary" type="submit" cdkFocusInitial>Add</button>
   </mat-dialog-actions>
 
 </form>

@@ -2,14 +2,18 @@
   <mat-toolbar color="primary" style="display: flex; justify-content: space-between">
     <div style="flex: 1 1 auto">Stock Dashboard</div>
 
-    <div style="display: flex;">
-      <mat-icon>brightness_5</mat-icon>
+    <div style="display: flex; flex-direction: row; align-items: center;">
+      <button mat-raised-button color="accent" (click)="openAddStock()" style="margin-right: 15px;">Add stock</button>
+      <mat-icon color="accent">brightness_5</mat-icon>
       <mat-slide-toggle (change)="darkModeToggle($event)" style="margin: 0 10px;"></mat-slide-toggle>
-      <mat-icon>bedtime</mat-icon>
+      <mat-icon color="accent">bedtime</mat-icon>
     </div>
   </mat-toolbar>
 
-  <hello name=" Bob Bobberton"></hello>
+  <div style="margin: 15px;">
 
-  <button mat-raised-button color="primary" (click)="openAddStock()">Add stock</button>
+    <hello name="Bob Bobberton"></hello>
+
+    <app-stock-list [stocks]="stocks"></app-stock-list>
+  </div>
 </div>
