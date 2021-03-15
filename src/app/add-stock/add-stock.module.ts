@@ -4,7 +4,6 @@ import { MatDialogModule } from "@angular/material/dialog";
 import { MatInputModule } from "@angular/material/input";
 import { AddStockComponent } from "./add-stock.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { NgxCurrencyModule } from "ngx-currency";
 
 @NgModule({
   imports: [
@@ -12,8 +11,7 @@ import { NgxCurrencyModule } from "ngx-currency";
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule,
-    NgxCurrencyModule
+    ReactiveFormsModule
   ],
   declarations: [AddStockComponent]
 })

@@ -13,7 +13,7 @@ export class AddStockComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      ticker: ["", Validators.required],
+      ticker: [""],
       avgPrice: [""]
       // port: [ this.DEFAULT_REST_PORT ],
       // backupHostGroup: this.formBuilder.group({
