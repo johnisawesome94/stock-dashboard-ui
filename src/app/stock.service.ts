@@ -19,8 +19,8 @@ export class StockService {
     return this.httpClient.post(this.stocksUrl, stock);
   }
 
-  editStock(stockId: number, stock: NewStock): any {
-    return this.httpClient.put(`${this.stocksUrl}/${stockId}`, stock);
+  editStock(stock: NewStock): any {
+    return this.httpClient.put(`${this.stocksUrl}/${stock.id}`, stock);
   }
 
   deleteStock(stockId: number): any {

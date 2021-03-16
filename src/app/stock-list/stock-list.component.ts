@@ -34,7 +34,7 @@ export class StockListComponent implements OnInit {
   ngOnInit() {}
 
   public onEditStock() {
-    this.editStock.emit(this.selection.selected[0].id);
+    this.editStock.emit(this.selection.selected[0]);
   }
 
   public deleteStock() {
