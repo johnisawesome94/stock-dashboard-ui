@@ -1,3 +1,22 @@
+<mat-toolbar *ngIf="selection?.selected?.length" color="accent"
+  style="display: flex; justify-content: flex-end; flex-direction: row; height: 45px;">
+  <button mat-icon-button style="margin-right: 15px;" (click)="onEditStock()">
+    <mat-icon>edit</mat-icon>
+  </button>
+  <button mat-icon-button (click)="deleteStock()">
+    <mat-icon>delete</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-toolbar *ngIf="!selection?.selected?.length" color="primary"
+  style="display: flex; justify-content: flex-end; flex-direction: row; height: 45px;">
+  <button mat-icon-button (click)="refresh()">
+    <mat-icon>refresh</mat-icon>
+  </button>
+</mat-toolbar>
+
+
+
 <table mat-table style="width: 100%" [dataSource]="dataSource" class="mat-elevation-z8">
 
   <!-- Position Column -->
@@ -19,5 +38,11 @@
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)"
+    [ngClass]="{hovered: row.hovered, highlighted: selection.isSelected(row)}" (mouseover)="row.hovered = true"
+    (mouseout)="row.hovered = false"></tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No data</td>
+  </tr>
 </table>

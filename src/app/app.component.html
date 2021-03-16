@@ -13,6 +13,7 @@
   <div style="margin: 15px;">
 
     <hello name="Bob Bobberton"></hello>
-    <app-stock-list *ngIf="stocks && stocks.length" [stocks]="stocks"></app-stock-list>
+    <app-stock-list *ngIf="stocks && stocks.length" [stocks]="stocks" (updateStockList)="getStocks()"
+      (editStock)="openAddEditStockDialog(false, $event)"></app-stock-list>
   </div>
 </div>

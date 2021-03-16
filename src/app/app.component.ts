@@ -3,8 +3,10 @@ import { Component, HostBinding, VERSION } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
-import { AddStockComponent } from "./add-stock/add-stock.component";
-import { NewStock } from "./add-stock/new-stock";
+import { AddEditStockComponent } from "./add-edit-stock/add-edit-stock.component";
+import { NewStock } from "./add-edit-stock/new-stock";
+import { Stock } from "./stock-list/stock";
+import { StockService } from "./stock.service";
 
 @Component({
   selector: "my-app",
@@ -20,23 +22,25 @@ export class AppComponent {
   constructor(
     private dialog: MatDialog,
     private iconRegistry: MatIconRegistry,
-    private overlay: OverlayContainer
+    private overlay: OverlayContainer,
+    private stockService: StockService
   ) {}
 
   ngOnInit(): void {
     this.iconRegistry.registerFontClassAlias("fontawesome", "fa");
+    this.getStocks();
   }
 
-  public openAddStock() {
+  public openAddEditStockDialog(isAdd: boolean = true) {
     this.dialog
-      .open(AddStockComponent, {
+      .open(AddEditStockComponent, {
+        data: { isAdd: isAdd },
         width: "600px"
       })
       .afterClosed()
-      .subscribe((result: NewStock) => {
-        if (!!result) {
-          this.stocks.push(result);
-          this.stocks = [...this.stocks];
+      .subscribe(result => {
+        if (result === "success") {
+          this.getStocks();
         }
       });
   }
@@ -48,5 +52,17 @@ export class AppComponent {
     } else {
       this.overlay.getContainerElement().classList.remove(this.darkClassName);
     }
+  }
+
+  public getStocks() {
+    this.stockService.getStocks().subscribe(
+      (stocks: Stock[]) => {
+        console.log("successfully got stocks");
+        this.stocks = stocks;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

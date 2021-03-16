@@ -1,6 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
-import { MatDialogRef } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { StockService } from "../stock.service";
 import { NewStock } from "./new-stock";
 
 @Component({
@@ -13,12 +14,14 @@ export class AddStockComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    public dialogRef: MatDialogRef<AddStockComponent>
+    private stockService: StockService,
+    public dialogRef: MatDialogRef<AddStockComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { isAdd: boolean }
   ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
-      ticker: ["", { validators: [Validators.required] }],
+      ticker: ["", { disabled: true, validators: [Validators.required] }],
       avgPrice: ["", { validators: [Validators.required] }],
       numberShares: ["", { validators: [Validators.required] }]
     });
@@ -35,7 +38,16 @@ export class AddStockComponent implements OnInit {
         avgPrice: this.form.get("avgPrice").value,
         numberShares: this.form.get("numberShares").value
       };
-      this.dialogRef.close(newStock);
+      this.stockService.addStock(newStock).subscribe(
+        () => {
+          console.log("stock added!");
+        },
+        error => {
+          console.log("failed to add stock");
+          console.log(error);
+        }
+      );
+      this.dialogRef.close("success");
     }
   }
 }

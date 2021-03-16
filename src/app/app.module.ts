@@ -14,6 +14,8 @@ import { MatIconModule } from "@angular/material/icon";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { MyErrorStateMatcher } from "./error-state-matcher/error-state-matcher";
+import { HttpClientModule } from "@angular/common/http";
+import { StockService } from "./stock.service";
 
 @NgModule({
   imports: [
@@ -26,10 +28,14 @@ import { MyErrorStateMatcher } from "./error-state-matcher/error-state-matcher";
     MatSlideToggleModule,
     MatIconModule,
     MatToolbarModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   declarations: [AppComponent, HelloComponent],
   bootstrap: [AppComponent],
-  providers: [{ provide: ErrorStateMatcher, useClass: MyErrorStateMatcher }]
+  providers: [
+    { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher },
+    StockService
+  ]
 })
 export class AppModule {}

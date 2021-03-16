@@ -1,5 +1,5 @@
 export interface NewStock {
-  ticker: string;
+  ticker?: string;
   avgPrice: number;
   numberShares: number;
 }
