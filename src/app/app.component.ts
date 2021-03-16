@@ -4,7 +4,6 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { AddEditStockComponent } from "./add-edit-stock/add-edit-stock.component";
-import { NewStock } from "./add-edit-stock/new-stock";
 import { Stock } from "./stock-list/stock";
 import { StockService } from "./stock.service";
 
@@ -17,7 +16,7 @@ export class AppComponent {
   @HostBinding("class") className = "";
 
   private readonly darkClassName: string = "darkMode";
-  public stocks: NewStock[] = [];
+  public stocks: Stock[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -31,10 +30,10 @@ export class AppComponent {
     this.getStocks();
   }
 
-  public openAddEditStockDialog(isAdd: boolean = true) {
+  public openAddEditStockDialog(isAdd: boolean = true, stockId?: number) {
     this.dialog
       .open(AddEditStockComponent, {
-        data: { isAdd: isAdd },
+        data: { isAdd: isAdd, stockId: stockId },
         width: "600px"
       })
       .afterClosed()

@@ -5,21 +5,22 @@ import { StockService } from "../stock.service";
 import { NewStock } from "./new-stock";
 
 @Component({
-  selector: "app-add-stock",
-  templateUrl: "./add-stock.component.html",
-  styleUrls: ["./add-stock.component.scss"]
+  selector: "app-add-edit-stock",
+  templateUrl: "./add-edit-stock.component.html",
+  styleUrls: ["./add-edit-stock.component.scss"]
 })
-export class AddStockComponent implements OnInit {
+export class AddEditStockComponent implements OnInit {
   public form;
 
   constructor(
     private formBuilder: FormBuilder,
     private stockService: StockService,
-    public dialogRef: MatDialogRef<AddStockComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { isAdd: boolean }
+    public dialogRef: MatDialogRef<AddEditStockComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { isAdd: boolean; stockId?: number }
   ) {}
 
   ngOnInit() {
+    console.log("got here");
     this.form = this.formBuilder.group({
       ticker: ["", { disabled: true, validators: [Validators.required] }],
       avgPrice: ["", { validators: [Validators.required] }],

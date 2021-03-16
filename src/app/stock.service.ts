@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { NewStock } from "./add-stock/new-stock";
+import { NewStock } from "./add-edit-stock/new-stock";
 import { Stock } from "./stock-list/stock";
 
 @Injectable()

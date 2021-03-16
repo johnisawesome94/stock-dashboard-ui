@@ -4,7 +4,7 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { AddStockModule } from "./add-stock/add-stock.module";
+import { AddEditStockModule } from "./add-edit-stock/add-edit-stock.module";
 import { StockListModule } from "./stock-list/stock-list.module";
 import { AppComponent } from "./app.component";
 import { HelloComponent } from "./hello.component";
@@ -19,7 +19,7 @@ import { StockService } from "./stock.service";
 
 @NgModule({
   imports: [
-    AddStockModule,
+    AddEditStockModule,
     StockListModule,
     BrowserAnimationsModule,
     BrowserModule,
