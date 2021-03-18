@@ -4,10 +4,9 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { AddEditStockModule } from "./add-edit-stock/add-edit-stock.module";
-import { StockListModule } from "./stock-list/stock-list.module";
+import { AddEditStockModule } from "./main/add-edit-stock/add-edit-stock.module";
+import { StockListModule } from "./main/stock-list/stock-list.module";
 import { AppComponent } from "./app.component";
-import { HelloComponent } from "./hello.component";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSlideToggleModule } from "@angular/material/slide-toggle";
 import { MatIconModule } from "@angular/material/icon";
@@ -31,7 +30,7 @@ import { StockService } from "./stock.service";
     ReactiveFormsModule,
     HttpClientModule
   ],
-  declarations: [AppComponent, HelloComponent],
+  declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
     { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher },

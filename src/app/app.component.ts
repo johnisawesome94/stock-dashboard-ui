@@ -3,10 +3,10 @@ import { Component, HostBinding, VERSION } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
-import { AddEditStockComponent } from "./add-edit-stock/add-edit-stock.component";
-import { NewStock } from "./add-edit-stock/new-stock";
-import { Stock } from "./stock-list/stock";
-import { StockService } from "./stock.service";
+import { AddEditStockComponent } from "./main/add-edit-stock/add-edit-stock.component";
+import { NewStock } from "./main/add-edit-stock/new-stock";
+import { Stock } from "./main/stock-list/stock";
+import { StockService } from "./main/stock.service";
 
 @Component({
   selector: "my-app",
