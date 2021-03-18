@@ -49,6 +49,7 @@ export class AddEditStockComponent implements OnInit {
         this.stockService.addStock(newStock).subscribe(
           () => {
             console.log("stock added!");
+            
           },
           error => {
             console.log("failed to add stock");
@@ -61,6 +62,8 @@ export class AddEditStockComponent implements OnInit {
         this.stockService.editStock(newStock).subscribe(
           () => {
             console.log("stock edited!");
+                  this.dialogRef.close("success");
+
           },
           error => {
             console.log("failed to edit stock");
