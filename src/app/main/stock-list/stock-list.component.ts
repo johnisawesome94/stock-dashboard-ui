@@ -13,6 +13,7 @@ export class StockListComponent implements OnInit {
   @Input() public set stocks(stocks) {
     this._stocks = stocks;
     this.dataSource = this.stocks;
+    console.log(this.stocks)
     this.selection = new SelectionModel<Stock[]>(false, []);
   }
 
@@ -25,7 +26,7 @@ export class StockListComponent implements OnInit {
 
   public dataSource;
   public selection;
-  public displayedColumns: string[] = ["ticker", "avgPrice", "numberShares"];
+  public displayedColumns: string[] = ["ticker", "avgPrice", "numberShares", "openprice", "closeprice"];
 
   private _stocks: Stock[] = [];
 

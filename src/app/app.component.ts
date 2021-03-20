@@ -59,6 +59,7 @@ export class AppComponent {
       (stocks: Stock[]) => {
         console.log("successfully got stocks");
         this.stocks = stocks;
+        console.log(this.stocks)
       },
       error => {
         console.log(error);
