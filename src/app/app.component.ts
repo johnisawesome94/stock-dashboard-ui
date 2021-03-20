@@ -5,6 +5,8 @@ import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
 import { AddEditStockComponent } from "./main/add-edit-stock/add-edit-stock.component";
 import { NewStock } from "./main/add-edit-stock/new-stock";
+import { DarkMode } from "./main/dark-mode/dark-mode";
+import { DarkModeService } from "./main/dark-mode/dark-mode.service";
 import { Stock } from "./main/stock-list/stock";
 import { StockService } from "./main/stock.service";
 
@@ -16,19 +18,22 @@ import { StockService } from "./main/stock.service";
 export class AppComponent {
   @HostBinding("class") className = "";
 
-  private readonly darkClassName: string = "darkMode";
+  private readonly darkClassName: string = "";
   public stocks: Stock[] = [];
+  public darkMode: DarkMode = {darkMode:true};
 
   constructor(
     private dialog: MatDialog,
     private iconRegistry: MatIconRegistry,
     private overlay: OverlayContainer,
-    private stockService: StockService
+    private stockService: StockService,
+    private darkModeService: DarkModeService
   ) {}
 
   ngOnInit(): void {
     this.iconRegistry.registerFontClassAlias("fontawesome", "fa");
     this.getStocks();
+    this.getDarkMode();
   }
 
   public openAddEditStockDialog(isAdd: boolean = true, stock?: NewStock) {
@@ -46,8 +51,19 @@ export class AppComponent {
   }
 
   public darkModeToggle(event: MatSlideToggleChange) {
-    this.className = event.checked ? "darkMode" : "";
-    if (event.checked) {
+    this.darkMode = { darkMode: event.checked};
+    this.darkModeService.editDarkMode(this.darkMode).subscribe(
+      () => {
+        console.log("successfully updated dark mode");
+      },
+      error => {
+        console.log("failed to edit dark mode");
+        console.log(error);
+      }
+    );
+
+    this.className = this.darkMode.darkMode ? "darkMode" : "";
+    if (this.darkMode.darkMode) {
       this.overlay.getContainerElement().classList.add(this.darkClassName);
     } else {
       this.overlay.getContainerElement().classList.remove(this.darkClassName);
@@ -59,7 +75,21 @@ export class AppComponent {
       (stocks: Stock[]) => {
         console.log("successfully got stocks");
         this.stocks = stocks;
-        console.log(this.stocks)
+        console.log(this.stocks);
+      },
+      error => {
+        console.log(error);
+      }
+    );
+  }
+
+    public getDarkMode() {
+    this.darkModeService.getDarkMode().subscribe(
+      (darkMode: DarkMode) => {
+        console.log("successfully edited dark mode");
+        this.darkMode = darkMode;
+        this.className = this.darkMode.darkMode ? "darkMode" : "";
+        console.log(this.darkMode);
       },
       error => {
         console.log(error);

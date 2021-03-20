@@ -15,6 +15,7 @@ import { ErrorStateMatcher } from "@angular/material/core";
 import { MyErrorStateMatcher } from "./error-state-matcher/error-state-matcher";
 import { HttpClientModule } from "@angular/common/http";
 import { StockService } from "./main/stock.service";
+import { DarkModeService } from "./main/dark-mode/dark-mode.service";
 
 @NgModule({
   imports: [
@@ -34,7 +35,8 @@ import { StockService } from "./main/stock.service";
   bootstrap: [AppComponent],
   providers: [
     { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher },
-    StockService
+    StockService,
+    DarkModeService
   ]
 })
 export class AppModule {}
