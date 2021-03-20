@@ -14,7 +14,7 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { ErrorStateMatcher } from "@angular/material/core";
 import { MyErrorStateMatcher } from "./error-state-matcher/error-state-matcher";
 import { HttpClientModule } from "@angular/common/http";
-import { StockService } from "./stock.service";
+import { StockService } from "./main/stock.service";
 
 @NgModule({
   imports: [
