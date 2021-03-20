@@ -10,6 +10,12 @@
 
 <mat-toolbar *ngIf="!selection?.selected?.length" color="primary"
   style="display: flex; justify-content: flex-end; flex-direction: row; height: 45px;">
+  <mat-form-field style="flex: 1;">
+    <input matInput type="text" [formControl]="searchControl">
+    <button mat-button matSuffix mat-icon-button aria-label="Search">
+    <mat-icon>search</mat-icon>
+  </button>
+  </mat-form-field>
   <button mat-icon-button (click)="refresh()">
     <mat-icon>refresh</mat-icon>
   </button>
@@ -37,13 +43,13 @@
     <td mat-cell *matCellDef="let element"> {{element.numberShares}} </td>
   </ng-container>
 
-    <!-- Open Column -->
+  <!-- Open Column -->
   <ng-container matColumnDef="openprice">
     <th mat-header-cell *matHeaderCellDef> Opening Price </th>
     <td mat-cell *matCellDef="let element"> {{element.open | currency}} </td>
   </ng-container>
 
-    <!-- Closing Column -->
+  <!-- Closing Column -->
   <ng-container matColumnDef="closeprice">
     <th mat-header-cell *matHeaderCellDef> Closing Price </th>
     <td mat-cell *matCellDef="let element"> {{element.previousClose | currency}} </td>

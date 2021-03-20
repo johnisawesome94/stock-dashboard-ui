@@ -20,7 +20,7 @@ export class AppComponent {
 
   private readonly darkClassName: string = "";
   public stocks: Stock[] = [];
-  public darkMode: DarkMode = {darkMode:true};
+  public darkMode: DarkMode = { darkMode: true };
 
   constructor(
     private dialog: MatDialog,
@@ -51,7 +51,7 @@ export class AppComponent {
   }
 
   public darkModeToggle(event: MatSlideToggleChange) {
-    this.darkMode = { darkMode: event.checked};
+    this.darkMode = { darkMode: event.checked };
     this.darkModeService.editDarkMode(this.darkMode).subscribe(
       () => {
         console.log("successfully updated dark mode");
@@ -70,8 +70,8 @@ export class AppComponent {
     }
   }
 
-  public getStocks() {
-    this.stockService.getStocks().subscribe(
+  public getStocks(searchTerm?: string) {
+    this.stockService.getStocks(searchTerm).subscribe(
       (stocks: Stock[]) => {
         console.log("successfully got stocks");
         this.stocks = stocks;
@@ -83,7 +83,7 @@ export class AppComponent {
     );
   }
 
-    public getDarkMode() {
+  public getDarkMode() {
     this.darkModeService.getDarkMode().subscribe(
       (darkMode: DarkMode) => {
         console.log("successfully edited dark mode");

@@ -11,11 +11,15 @@ export class StockService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getStocks(): Observable<Stock[]> {
-    return this.httpClient.get<Stock[]>(this.stocksUrl);
+  getStocks(searchTerm?: string): Observable<Stock[]> {
+    const url = searchTerm
+      ? `${this.stocksUrl}?search=${searchTerm}`
+      : this.stocksUrl;
+    return this.httpClient.get<Stock[]>(url);
   }
 
   addStock(stock: NewStock): any {
+    stock.ticker = stock.ticker.toUpperCase();
     return this.httpClient.post(this.stocksUrl, stock);
   }
 
