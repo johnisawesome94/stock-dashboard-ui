@@ -8,6 +8,7 @@ import { NewStock } from "./main/add-edit-stock/new-stock";
 import { DarkMode } from "./main/dark-mode/dark-mode";
 import { DarkModeService } from "./main/dark-mode/dark-mode.service";
 import { Stock } from "./main/stock-list/stock";
+import { StockQuery } from "./main/stock-query";
 import { StockService } from "./main/stock.service";
 
 @Component({
@@ -70,8 +71,8 @@ export class AppComponent {
     }
   }
 
-  public getStocks(searchTerm?: string) {
-    this.stockService.getStocks(searchTerm).subscribe(
+  public getStocks(stockQuery?: StockQuery) {
+    this.stockService.getStocks(stockQuery).subscribe(
       (stocks: Stock[]) => {
         console.log("successfully got stocks");
         this.stocks = stocks;

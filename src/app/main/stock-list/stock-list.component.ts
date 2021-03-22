@@ -1,12 +1,21 @@
 import { SelectionModel } from "@angular/cdk/collections";
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { MatSort } from "@angular/material/sort";
 import {
   debounceTime,
   distinctUntilChanged,
   filter,
   finalize
 } from "rxjs/operators";
+import { StockQuery } from "../stock-query";
 import { StockService } from "../stock.service";
 import { Stock } from "./stock";
 
@@ -16,9 +25,13 @@ import { Stock } from "./stock";
   styleUrls: ["./stock-list.component.scss"]
 })
 export class StockListComponent implements OnInit {
+  @ViewChild(MatSort) sort: MatSort;
+
   @Input() public set stocks(stocks) {
     this._stocks = stocks;
     this.dataSource = this.stocks;
+    this.dataSource.sort = this.sort;
+
     console.log(this.stocks);
     this.selection = new SelectionModel<Stock[]>(false, []);
   }
@@ -32,14 +45,19 @@ export class StockListComponent implements OnInit {
 
   public dataSource;
   public selection;
+  // Needs to match key sent from backend
   public displayedColumns: string[] = [
     "ticker",
     "avgPrice",
     "numberShares",
-    "openprice",
-    "closeprice"
+    "open",
+    "previousClose"
   ];
   public searchControl: FormControl;
+  public stockQuery: StockQuery = {
+    search: null,
+    sort: { sortDir: null, sortKey: null }
+  };
 
   private _stocks: Stock[] = [];
 
@@ -53,7 +71,10 @@ export class StockListComponent implements OnInit {
         distinctUntilChanged(),
         filter(term => term !== undefined && term !== null)
       )
-      .subscribe((term: string) => this.updateStockList.emit(term));
+      .subscribe((term: string) => {
+        this.stockQuery.search = term;
+        this.updateStockList.emit(this.stockQuery);
+      });
   }
 
   public onEditStock() {
@@ -80,6 +101,14 @@ export class StockListComponent implements OnInit {
   }
 
   public refresh() {
-    this.updateStockList.emit();
+    this.updateStockList.emit(this.stockQuery);
+  }
+
+  public stockSort(event) {
+    console.log(event);
+
+    this.stockQuery.sort.sortDir = event.direction;
+    this.stockQuery.sort.sortKey = event.active;
+    this.updateStockList.emit(this.stockQuery);
   }
 }

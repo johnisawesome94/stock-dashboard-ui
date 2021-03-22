@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { NewStock } from "./add-edit-stock/new-stock";
 import { Stock } from "./stock-list/stock";
+import { StockQuery } from "./stock-query";
 
 @Injectable()
 export class StockService {
@@ -11,10 +12,32 @@ export class StockService {
 
   constructor(private httpClient: HttpClient) {}
 
-  getStocks(searchTerm?: string): Observable<Stock[]> {
-    const url = searchTerm
-      ? `${this.stocksUrl}?search=${searchTerm}`
-      : this.stocksUrl;
+  getStocks(stockQuery?: StockQuery): Observable<Stock[]> {
+    if (stockQuery && stockQuery.sort.sortDir) {
+      stockQuery.sort.sortDir = stockQuery.sort.sortDir === "asc" ? 1 : -1;
+    }
+
+    let url: string = this.stocksUrl;
+    if (stockQuery && stockQuery.search && !stockQuery.sort.sortDir) {
+      url = url + "?search=" + stockQuery.search;
+    } else if (stockQuery && !stockQuery.search && stockQuery.sort.sortDir) {
+      url =
+        url +
+        "?sortDir=" +
+        stockQuery.sort.sortDir +
+        "&sortKey=" +
+        stockQuery.sort.sortKey;
+    } else if (stockQuery && stockQuery.search && stockQuery.sort.sortDir) {
+      url =
+        url +
+        "?search=" +
+        stockQuery.search +
+        "&sortDir=" +
+        stockQuery.sort.sortDir +
+        "&sortKey=" +
+        stockQuery.sort.sortKey;
+    }
+
     return this.httpClient.get<Stock[]>(url);
   }
 
