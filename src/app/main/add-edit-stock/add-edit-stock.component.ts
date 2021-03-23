@@ -54,7 +54,7 @@ export class AddEditStockComponent implements OnInit {
             this.dialogRef.close("success");
           },
           error => {
-            this.openSnackBar(error.error.message);
+            this.openSnackBar(error);
             console.log("failed to add stock");
             console.log(error);
           }
@@ -68,7 +68,7 @@ export class AddEditStockComponent implements OnInit {
             this.dialogRef.close("success");
           },
           error => {
-            this.openSnackBar(error.message);
+            this.openSnackBar(error);
             console.log("failed to edit stock");
             console.log(error);
           }
@@ -77,7 +77,10 @@ export class AddEditStockComponent implements OnInit {
     }
   }
 
-  public openSnackBar(message: string) {
+  public openSnackBar(error) {
+    const message: string = error.error.message
+      ? error.error.message
+      : error.message;
     this._snackBar.open(message, null, {
       duration: 3000,
       verticalPosition: "top",

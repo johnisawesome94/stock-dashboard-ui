@@ -82,7 +82,7 @@ export class AppComponent {
       },
       error => {
         console.log(error);
-        this.openSnackBar(error.message);
+        this.openSnackBar(error);
       }
     );
   }
@@ -101,7 +101,8 @@ export class AppComponent {
     );
   }
 
-  public openSnackBar(message: string) {
+  public openSnackBar(error) {
+    const message: string = error.error.message ? error.error.message : error.message;
     this._snackBar.open(message, null, {
       duration: 3000,
       verticalPosition: "top",
