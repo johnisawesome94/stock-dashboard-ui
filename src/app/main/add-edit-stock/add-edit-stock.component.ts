@@ -1,6 +1,7 @@
 import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { StockService } from "../stock.service";
 import { NewStock } from "./new-stock";
 
@@ -16,7 +17,8 @@ export class AddEditStockComponent implements OnInit {
     private formBuilder: FormBuilder,
     private stockService: StockService,
     public dialogRef: MatDialogRef<AddEditStockComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: { isAdd: boolean; stock?: NewStock }
+    @Inject(MAT_DIALOG_DATA) public data: { isAdd: boolean; stock?: NewStock },
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -49,9 +51,10 @@ export class AddEditStockComponent implements OnInit {
         this.stockService.addStock(newStock).subscribe(
           () => {
             console.log("stock added!");
-            
+            this.dialogRef.close("success");
           },
           error => {
+            this.openSnackBar(error.error.message);
             console.log("failed to add stock");
             console.log(error);
           }
@@ -62,16 +65,23 @@ export class AddEditStockComponent implements OnInit {
         this.stockService.editStock(newStock).subscribe(
           () => {
             console.log("stock edited!");
-                  this.dialogRef.close("success");
-
+            this.dialogRef.close("success");
           },
           error => {
+            this.openSnackBar(error.message);
             console.log("failed to edit stock");
             console.log(error);
           }
         );
       }
-      this.dialogRef.close("success");
     }
+  }
+
+  public openSnackBar(message: string) {
+    this._snackBar.open(message, null, {
+      duration: 3000,
+      verticalPosition: "top",
+      panelClass: "error-snackbar"
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Component, HostBinding, VERSION } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatIconRegistry } from "@angular/material/icon";
 import { MatSlideToggleChange } from "@angular/material/slide-toggle";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { AddEditStockComponent } from "./main/add-edit-stock/add-edit-stock.component";
 import { NewStock } from "./main/add-edit-stock/new-stock";
 import { DarkMode } from "./main/dark-mode/dark-mode";
@@ -28,7 +29,8 @@ export class AppComponent {
     private iconRegistry: MatIconRegistry,
     private overlay: OverlayContainer,
     private stockService: StockService,
-    private darkModeService: DarkModeService
+    private darkModeService: DarkModeService,
+    private _snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +82,7 @@ export class AppComponent {
       },
       error => {
         console.log(error);
+        this.openSnackBar(error.message);
       }
     );
   }
@@ -96,5 +99,13 @@ export class AppComponent {
         console.log(error);
       }
     );
+  }
+
+  public openSnackBar(message: string) {
+    this._snackBar.open(message, null, {
+      duration: 3000,
+      verticalPosition: "top",
+      panelClass: "error-snackbar"
+    });
   }
 }

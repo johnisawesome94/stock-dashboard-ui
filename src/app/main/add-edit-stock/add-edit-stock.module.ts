@@ -5,6 +5,7 @@ import { MatInputModule } from "@angular/material/input";
 import { AddEditStockComponent } from "./add-edit-stock.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { CommonModule } from "@angular/common";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import { CommonModule } from "@angular/common";
     MatDialogModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatSnackBarModule
   ],
   declarations: [AddEditStockComponent]
 })

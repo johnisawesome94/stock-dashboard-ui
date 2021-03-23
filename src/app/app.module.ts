@@ -16,6 +16,7 @@ import { MyErrorStateMatcher } from "./error-state-matcher/error-state-matcher";
 import { HttpClientModule } from "@angular/common/http";
 import { StockService } from "./main/stock.service";
 import { DarkModeService } from "./main/dark-mode/dark-mode.service";
+import { MatSnackBarModule } from "@angular/material/snack-bar";
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { DarkModeService } from "./main/dark-mode/dark-mode.service";
     MatIconModule,
     MatToolbarModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatSnackBarModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
