@@ -17,6 +17,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { StockService } from "./main/stock.service";
 import { DarkModeService } from "./main/dark-mode/dark-mode.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
+import { StockChartModule } from "@syncfusion/ej2-angular-charts";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     MatToolbarModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    StockChartModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
