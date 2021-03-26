@@ -17,6 +17,7 @@ import { MatSnackBarModule } from "@angular/material/snack-bar";
     ReactiveFormsModule,
     MatSnackBarModule
   ],
-  declarations: [AddEditStockComponent]
+  declarations: [AddEditStockComponent],
+  entryComponents: [AddEditStockComponent]
 })
 export class AddEditStockModule {}
