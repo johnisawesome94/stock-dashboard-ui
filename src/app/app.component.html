@@ -1,11 +1,6 @@
-<div
-  class="mat-app-background"
-  style="height: 100%; width: 100%;display: flex; flex-direction: column; overflow-y: auto;"
->
-  <mat-toolbar
-    color="primary"
-    style="display: flex; justify-content: space-between; min-height: 50px;"
-  >
+<div class="mat-app-background"
+  style="height: 100%; width: 100%;display: flex; flex-direction: column; overflow-y: auto;">
+  <mat-toolbar color="primary" style="display: flex; justify-content: space-between; min-height: 50px;">
     <div style="flex: 1 1 auto">Stock dashboard</div>
 
     <div style="display: flex; flex-direction: row; align-items: center;">
@@ -18,53 +13,18 @@
         Add stock
       </button>
       <mat-icon color="accent">brightness_5</mat-icon>
-      <mat-slide-toggle
-        (change)="darkModeToggle($event)"
-        [checked]="darkMode.darkMode"
-        style="margin: 0 10px;"
-      >
+      <mat-slide-toggle (change)="darkModeToggle($event)" [checked]="darkMode.darkMode" style="margin: 0 10px;">
       </mat-slide-toggle>
       <mat-icon color="accent">bedtime</mat-icon>
     </div>
   </mat-toolbar>
 
   <div style="margin: 15px;">
-    <app-stock-list
-      [stocks]="stocks"
-      (updateStockList)="getStocks($event)"
-      (editStock)="openAddEditStockDialog(false, $event)"
-    ></app-stock-list>
+    <app-stock-list [stocks]="stocks" (updateStockList)="getStocks($event)"
+      (editStock)="openAddEditStockDialog(false, $event)"></app-stock-list>
   </div>
 
-  <div *ngIf="showChart" style="margin: 0 15px;">
-    <ejs-rangenavigator
-      valueType="DateTime"
-      (changed)="rangeChanged($event)"
-      disableRangeSelector="true"
-      [dataSource]="stockchartData"
-      xName="x"
-      yName="close"
-      [periodSelectorSettings]="periods"
-    >
-    </ejs-rangenavigator>
-    <ejs-stockchart
-      id="chart-container"
-      [theme]="this.darkMode.darkMode ? 'MaterialDark' : 'Material'"
-      title="jill"
-      selectionMode="Series"
-    >
-      <e-stockchart-series-collection>
-        <e-stockchart-series
-          [dataSource]="stockchartData"
-          type="Candle"
-          xName="date"
-          High="high"
-          Low="low"
-          Open="open"
-          Close="close"
-          Name="Apple"
-        ></e-stockchart-series>
-      </e-stockchart-series-collection>
-    </ejs-stockchart>
+  <div *ngIf="showChart" style="width: 100%;">
+    <app-stock-chart *ngIf="showChart" [theme]="darkMode.darkMode"></app-stock-chart>
   </div>
 </div>

@@ -32,7 +32,6 @@ export class StockListComponent implements OnInit {
     this.dataSource = this.stocks;
     this.dataSource.sort = this.sort;
 
-    console.log(this.stocks);
     this.selection = new SelectionModel<Stock[]>(false, []);
   }
 

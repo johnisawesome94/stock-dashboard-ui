@@ -1,0 +1,35 @@
+<div class="mat-elevation-z8">
+  <form [formGroup]="form">
+    <mat-toolbar *ngIf="!selection?.selected?.length" color="primary"
+      style="display: flex; justify-content: flex-end; flex-direction: row; height: 45px;">
+
+      <button mat-raised-button color="accent" [matMenuTriggerFor]="seriesTypeMenu" style="margin-right: 15px;">Series type</button>
+      <button mat-raised-button color="accent" [matMenuTriggerFor]="trendlineTypeMenu">Trendline type</button>
+
+      <mat-menu #seriesTypeMenu="matMenu">
+        <button mat-menu-item *ngFor="let type of seriesType" (click)="onSeriesTypeMenuClick(type)" [ngClass]="{ highlighted: form.get('seriesType').value.displayValue === type.displayValue}">{{type.displayValue}}</button>
+      </mat-menu>
+
+      <mat-menu #trendlineTypeMenu="matMenu">
+        <button mat-menu-item *ngFor="let type of trendlineType" (click)="onTrendlineTypeMenuClick(type)" [ngClass]="{ highlighted: form.get('trendlineType').value.displayValue === type.displayValue}">{{type.displayValue}}</button>
+      </mat-menu>
+
+    </mat-toolbar>
+  </form>
+
+  <ejs-stockchart id="chart-container" [border]="{ width: 0 }" [crosshair]='{ enable: true }'
+    [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [theme]="theme ? 'MaterialDark' : 'Material'"
+    selectionMode="Series" [tooltip]='tooltip'>
+    <e-stockchart-series-collection>
+      <e-stockchart-series [dataSource]="stockchartData" [type]="form.get('seriesType').value.value"
+        [enableSolidCandles]="getSolidCandles()" xName="date" High="high" Low="low" Open="open"
+        [marker]='{ visible: true }' Close="close" Name="Apple">
+        <e-trendlines>
+          <e-trendline [visible]="form.get('trendlineType').value.value !== TrendlineType.None"
+            [type]="form.get('trendlineType').value.value" width=3 fill='#C64A75'>
+          </e-trendline>
+        </e-trendlines>
+      </e-stockchart-series>
+    </e-stockchart-series-collection>
+  </ejs-stockchart>
+</div>

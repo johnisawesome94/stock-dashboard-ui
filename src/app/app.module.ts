@@ -17,25 +17,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { StockService } from "./main/stock.service";
 import { DarkModeService } from "./main/dark-mode/dark-mode.service";
 import { MatSnackBarModule } from "@angular/material/snack-bar";
-import {
-  ChartAllModule,
-  PeriodSelectorService,
-  RangeNavigatorAllModule,
-  StockChartAllModule
-} from "@syncfusion/ej2-angular-charts";
-import {
-  CategoryService,
-  LineSeriesService
-} from "@syncfusion/ej2-angular-charts";
-import {
-  DateTimeService,
-  LegendService,
-  TooltipService
-} from "@syncfusion/ej2-angular-charts";
-import {
-  DataLabelService,
-  CandleSeriesService
-} from "@syncfusion/ej2-angular-charts";
+import { StockChartModule } from "./main/stock-chart/stock-chart.module";
 
 @NgModule({
   imports: [
@@ -51,24 +33,14 @@ import {
     ReactiveFormsModule,
     HttpClientModule,
     MatSnackBarModule,
-    ChartAllModule,
-    StockChartAllModule,
-    RangeNavigatorAllModule
+    StockChartModule
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],
   providers: [
     { provide: ErrorStateMatcher, useClass: MyErrorStateMatcher },
     StockService,
-    DarkModeService,
-    CategoryService,
-    LineSeriesService,
-    DateTimeService,
-    LegendService,
-    TooltipService,
-    DataLabelService,
-    CandleSeriesService,
-    PeriodSelectorService
+    DarkModeService
   ]
 })
 export class AppModule {}

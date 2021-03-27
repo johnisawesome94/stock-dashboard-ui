@@ -47,3 +47,39 @@ body {
   display: flex !important;
   justify-content: center;
 }
+
+ejs-stockchart div#chart-container_Secondary_Element {
+  display: none !important;
+}
+
+ejs-stockchart div#chart-container_stock_border {
+  height: 408px !important;
+}
+
+// mat-form-field.override {
+//   .mat-form-field-flex,
+//   .mat-form-field-label-wrapper {
+//     padding-top: 0;
+//   }
+
+//   .mat-form-field-wrapper {
+//     padding-bottom: 0;
+//   }
+
+//   .mat-form-field-underline {
+//     bottom: 0;
+//   }
+
+//   .mat-form-field-infix {
+//     border-top: 0;
+//     padding: 0;
+//   }
+// }
+
+.hovered {
+  background: #eee;
+}
+
+.highlighted {
+  background: #999 !important;
+}
