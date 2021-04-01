@@ -2,6 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { NewStock } from "./add-edit-stock/new-stock";
+import { PeriodOption } from "./stock-chart/period";
 import { ChartStockData } from "./stock-chart/stock-chart-data";
 import { Stock } from "./stock-list/stock";
 import { StockQuery } from "./stock-query";
@@ -55,7 +56,12 @@ export class StockService {
     return this.httpClient.delete(`${this.stocksUrl}/${stockId}`);
   }
 
-  getStockChart(ticker: string): Observable<ChartStockData[]> {
-    return this.httpClient.get<ChartStockData[]>(`${this.stocksUrl}/chart?ticker=${ticker}`);
+  getStockChart(
+    ticker: string,
+    period: PeriodOption
+  ): Observable<ChartStockData[]> {
+    return this.httpClient.get<ChartStockData[]>(
+      `${this.stocksUrl}/chart?ticker=${ticker}&period=${period.value}`
+    );
   }
 }

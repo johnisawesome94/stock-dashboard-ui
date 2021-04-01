@@ -25,26 +25,30 @@ export namespace Period {
     }
   }
 
-  export function getPeriodOptions(): PeriodOptions[] {
+  export function getPeriodOptions(): PeriodOption[] {
     return [
       {
         intervalType: "Days",
         interval: 1,
+        value: Period.OneDay,
         displayValue: Period.getDisplayValue(Period.OneDay)
       },
       {
         intervalType: "Weeks",
         interval: 1,
+        value: Period.OneWeek,
         displayValue: Period.getDisplayValue(Period.OneWeek)
       },
       {
         intervalType: "Months",
         interval: 1,
+        value: Period.OneMonth,
         displayValue: Period.getDisplayValue(Period.OneMonth)
       },
       {
         intervalType: "Years",
         interval: 1,
+        value: Period.OneYear,
         displayValue: Period.getDisplayValue(Period.OneYear)
       } //,
       // {
@@ -61,8 +65,9 @@ export namespace Period {
   }
 }
 
-export interface PeriodOptions {
+export interface PeriodOption {
   intervalType: "Years" | "Months" | "Weeks" | "Days" | "Auto";
   interval: number;
+  value: Period;
   displayValue: string;
 }
