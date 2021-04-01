@@ -1,4 +1,4 @@
-<div class="mat-elevation-z8">
+<div class="mat-elevation-z8" *ngIf="!!ticker">
   <form [formGroup]="form">
     <mat-toolbar *ngIf="!selection?.selected?.length" color="primary"
       style="display: flex; justify-content: flex-end; flex-direction: row; height: 45px;">
@@ -19,9 +19,9 @@
 
   <ejs-stockchart id="chart-container" [border]="{ width: 0 }" [crosshair]='{ enable: true }'
     [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis' [theme]="theme ? 'MaterialDark' : 'Material'"
-    selectionMode="Series" [tooltip]='tooltip'>
+    selectionMode="Series">
     <e-stockchart-series-collection>
-      <e-stockchart-series [dataSource]="stockchartData" [type]="form.get('seriesType').value.value"
+      <e-stockchart-series [dataSource]="stockChartData" [type]="form.get('seriesType').value.value"
         [enableSolidCandles]="getSolidCandles()" xName="date" High="high" Low="low" Open="open"
         [marker]='{ visible: true }' Close="close" Name="Apple">
         <e-trendlines>

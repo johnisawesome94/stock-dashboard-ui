@@ -1,5 +1,7 @@
 import { Component, ElementRef, Input, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
+import { StockService } from "../stock.service";
+import { StockChartData } from "./stock-chart-data";
 import { SeriesType } from "./stock-series-type";
 import { TrendlineType } from "./stock-trendline-types";
 
@@ -10,6 +12,13 @@ import { TrendlineType } from "./stock-trendline-types";
 })
 export class StockChartComponent implements OnInit {
   @Input() public theme: string;
+  @Input() public set ticker(ticker) {
+    this._ticker = ticker;
+    this.getData(ticker);
+  }
+  public get ticker() {
+    return this._ticker;
+  }
 
   public form;
 
@@ -27,7 +36,7 @@ export class StockChartComponent implements OnInit {
     enable: true
   };
 
-  public stockchartData;
+  public stockChartData;
   public SeriesType = SeriesType;
   public TrendlineType = TrendlineType;
 
@@ -41,7 +50,11 @@ export class StockChartComponent implements OnInit {
     displayValue: string;
   }[] = TrendlineType.getTrendlineTypeSelectOptions();
 
-  constructor(private formBuilder: FormBuilder) {}
+  private _ticker: string;
+  constructor(
+    private formBuilder: FormBuilder,
+    private stockService: StockService
+  ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group({
@@ -49,11 +62,9 @@ export class StockChartComponent implements OnInit {
       trendlineType: [this.trendlineType[0]]
     });
 
-    this.form.get("trendlineType").valueChanges.subscribe(value => {
-      console.log(value);
-    });
-
-    this.setData();
+    // this.form.get("trendlineType").valueChanges.subscribe(value => {
+    //   console.log(value);
+    // });
   }
 
   public getSolidCandles() {
@@ -76,6 +87,14 @@ export class StockChartComponent implements OnInit {
     displayValue: string;
   }) {
     this.form.get("trendlineType").setValue(type);
+  }
+
+  private getData(ticker: string) {
+    this.stockService
+      .getStockChart(ticker)
+      .subscribe((stockChartData: StockChartData) => {
+        this.stockChartData = stockChartData;
+      });
   }
 
   private setData() {

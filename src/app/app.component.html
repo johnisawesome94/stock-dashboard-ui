@@ -21,10 +21,11 @@
 
   <div style="margin: 15px;">
     <app-stock-list [stocks]="stocks" (updateStockList)="getStocks($event)"
-      (editStock)="openAddEditStockDialog(false, $event)"></app-stock-list>
+      (editStock)="openAddEditStockDialog(false, $event)" (tickerSelected)="tickerSelected($event)"></app-stock-list>
   </div>
 
   <div *ngIf="showChart" style="width: 100%;">
-    <app-stock-chart *ngIf="showChart" [theme]="darkMode.darkMode"></app-stock-chart>
+    <app-stock-chart *ngIf="showChart" [theme]="darkMode.darkMode" [ticker]="selectedTicker">
+    </app-stock-chart>
   </div>
 </div>

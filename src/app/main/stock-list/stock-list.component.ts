@@ -33,6 +33,15 @@ export class StockListComponent implements OnInit {
     this.dataSource.sort = this.sort;
 
     this.selection = new SelectionModel<Stock[]>(false, []);
+
+    this.selection.changed.subscribe(stock => {
+      if (stock.added?.length) {
+        console.log(stock.added[0].ticker);
+        this.tickerSelected.emit(stock.added[0].ticker);
+      } else {
+        this.tickerSelected.emit('');
+      }
+    });
   }
 
   public get stocks() {
@@ -41,6 +50,7 @@ export class StockListComponent implements OnInit {
 
   @Output() public updateStockList: EventEmitter<any> = new EventEmitter();
   @Output() public editStock: EventEmitter<any> = new EventEmitter();
+  @Output() public tickerSelected: EventEmitter<any> = new EventEmitter();
 
   public dataSource;
   public selection;

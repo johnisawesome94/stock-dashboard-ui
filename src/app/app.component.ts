@@ -26,6 +26,7 @@ export class AppComponent {
   public stocks: Stock[] = [];
   public darkMode: DarkMode = { darkMode: true };
   public showChart: boolean = false;
+  public selectedTicker: string = "";
 
   constructor(
     private dialog: MatDialog,
@@ -140,5 +141,10 @@ export class AppComponent {
     this.showChart = false;
     this.cd.detectChanges();
     setTimeout(() => (this.showChart = true), 500);
+  }
+
+  public tickerSelected(ticker: string): void {
+    console.log(ticker);
+    this.selectedTicker = ticker;
   }
 }
