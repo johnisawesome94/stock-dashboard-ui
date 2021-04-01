@@ -56,7 +56,16 @@ ejs-stockchart div#chart-container_stock_border {
   height: 408px !important;
 }
 
-// mat-form-field.override {
+mat-form-field.override {
+  .mat-form-field-wrapper {
+    padding-bottom: 0 !important;
+  }
+
+  .mat-form-field-underline {
+    position: unset !important;
+  }
+}
+
 //   .mat-form-field-flex,
 //   .mat-form-field-label-wrapper {
 //     padding-top: 0;
